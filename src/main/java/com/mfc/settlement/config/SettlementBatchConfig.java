@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.mfc.settlement.application.SettlementService;
+import com.mfc.settlement.common.entity.SettlementRequestStatus;
 import com.mfc.settlement.domain.SettlementRequest;
-import com.mfc.settlement.dto.SettlementResult;
+import com.mfc.settlement.dto.response.SettlementResult;
 import com.mfc.settlement.infrastructure.SettlementRequestRepository;
 
-import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -28,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class SettlementBatchConfig {
 	private final SettlementRequestRepository settlementRequestRepository;
 	private final SettlementService settlementService;
-	private final EntityManagerFactory entityManagerFactory;
 
 	@Bean
 	public Job settlementJob(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
@@ -48,7 +47,7 @@ public class SettlementBatchConfig {
 	@Bean
 	public Tasklet settlementTasklet() {
 		return (contribution, chunkContext) -> {
-			List<SettlementRequest> pendingRequests = settlementRequestRepository.findByStatus("PENDING");
+			List<SettlementRequest> pendingRequests = settlementRequestRepository.findByStatus(SettlementRequestStatus.PENDING);
 
 			List<SettlementResult> settlementResults = pendingRequests.stream()
 				.map(settlementRequest -> {

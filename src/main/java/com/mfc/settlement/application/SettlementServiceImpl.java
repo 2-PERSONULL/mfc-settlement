@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mfc.settlement.common.entity.SettlementRequestStatus;
 import com.mfc.settlement.domain.SettlementRequest;
-import com.mfc.settlement.dto.SettlementResult;
+import com.mfc.settlement.dto.response.SettlementResult;
 import com.mfc.settlement.infrastructure.SettlementRequestRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,22 +18,25 @@ public class SettlementServiceImpl implements SettlementService {
 	private final SettlementRequestRepository settlementRequestRepository;
 
 	@Transactional
+	@Override
 	public void settlePartner(List<? extends SettlementResult> settlementResults) {
 		settlementResults.forEach(settlementResult -> {
-			// 파트너 정산 처리 로직 구현
-			// ...
+			Long settlementRequestId = settlementResult.getId();
+			SettlementRequest settlementRequest = settlementRequestRepository.findById(settlementRequestId)
+				.orElse(null);
 
-			SettlementRequest settlementRequest = settlementRequestRepository.findById(settlementResult.getId())
-				.orElseThrow(() -> new IllegalArgumentException("Settlement request not found"));
+			if (settlementRequest != null) {
+				SettlementRequest updatedSettlementRequest = SettlementRequest.builder()
+					.id(settlementRequest.getId())
+					.partnerId(settlementRequest.getPartnerId())
+					.amount(settlementRequest.getAmount())
+					.status(SettlementRequestStatus.COMPLETED)
+					.build();
 
-			SettlementRequest updatedSettlementRequest = SettlementRequest.builder()
-				.id(settlementRequest.getId())
-				.partnerId(settlementRequest.getPartnerId())
-				.amount(settlementRequest.getAmount())
-				.status("SETTLED")
-				.build();
-
-			settlementRequestRepository.save(updatedSettlementRequest);
+				settlementRequestRepository.save(updatedSettlementRequest);
+			} else {
+				System.out.println("Settlement request not found for id: " + settlementRequestId);
+			}
 		});
 	}
 }

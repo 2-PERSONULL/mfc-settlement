@@ -3,6 +3,7 @@ package com.mfc.settlement.domain;
 import java.time.LocalDateTime;
 
 import com.mfc.settlement.common.entity.BaseTimeEntity;
+import com.mfc.settlement.common.entity.SettlementRequestStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,11 +40,11 @@ public class SettlementRequest extends BaseTimeEntity {
 	private String accountNumber;
 
 	@Column(name = "status", nullable = false)
-	private String status;
+	private SettlementRequestStatus status;
 
 	@Builder
 	public SettlementRequest(Long id, Long partnerId, Integer amount, LocalDateTime settlementDate, Integer feeAmount
-	, String accountNumber, String status) {
+	, String accountNumber, SettlementRequestStatus status) {
 		this.id = id;
 		this.partnerId = partnerId;
 		this.amount = amount;

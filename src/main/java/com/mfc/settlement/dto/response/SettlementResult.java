@@ -1,4 +1,4 @@
-package com.mfc.settlement.dto;
+package com.mfc.settlement.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
