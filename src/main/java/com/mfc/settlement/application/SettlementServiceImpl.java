@@ -26,17 +26,24 @@ public class SettlementServiceImpl implements SettlementService {
 				.orElse(null);
 
 			if (settlementRequest != null) {
-				SettlementRequest updatedSettlementRequest = SettlementRequest.builder()
-					.id(settlementRequest.getId())
-					.partnerId(settlementRequest.getPartnerId())
-					.amount(settlementRequest.getAmount())
-					.status(SettlementRequestStatus.COMPLETED)
-					.build();
-
+				SettlementRequest updatedSettlementRequest = getSettlementRequest(settlementRequest);
 				settlementRequestRepository.save(updatedSettlementRequest);
 			} else {
 				System.out.println("Settlement request not found for id: " + settlementRequestId);
 			}
 		});
+	}
+
+	private static SettlementRequest getSettlementRequest(SettlementRequest settlementRequest) {
+		return SettlementRequest.builder()
+			.id(settlementRequest.getId())
+			.partnerId(settlementRequest.getPartnerId())
+			.amount(settlementRequest.getAmount())
+			.settlementDate(settlementRequest.getSettlementDate())
+			.feeAmount(settlementRequest.getFeeAmount())
+			.accountNumber(settlementRequest.getAccountNumber())
+			.accountName(settlementRequest.getAccountName())
+			.status(SettlementRequestStatus.COMPLETED)
+			.build();
 	}
 }

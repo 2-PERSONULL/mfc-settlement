@@ -1,5 +1,6 @@
 package com.mfc.settlement.config;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.batch.core.Job;
@@ -62,6 +63,8 @@ public class SettlementBatchConfig {
 						.feeAmount(feeAmount)
 						.settlementAmount(settlementAmount)
 						.accountNumber(settlementRequest.getAccountNumber())
+						.accountName(settlementRequest.getAccountName())
+						.settlementDate(LocalDateTime.now())
 						.build();
 				})
 				.toList();

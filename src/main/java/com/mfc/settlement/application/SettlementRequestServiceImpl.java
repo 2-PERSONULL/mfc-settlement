@@ -19,16 +19,21 @@ public class SettlementRequestServiceImpl implements SettlementRequestService {
 	@Override
 	@Transactional
 	public void saveSettlementRequest(SettlementRequestDto requestDto) {
-		SettlementRequest settlementRequest = SettlementRequest.builder()
+		SettlementRequest settlementRequest = getSettlementRequest(requestDto);
+
+		settlementRequestRepository.save(settlementRequest);
+	}
+
+	private static SettlementRequest getSettlementRequest(SettlementRequestDto requestDto) {
+		return SettlementRequest.builder()
 			.partnerId(requestDto.getPartnerId())
 			.amount(requestDto.getAmount())
 			.settlementDate(requestDto.getSettlementDate())
 			.feeAmount(requestDto.getFeeAmount())
 			.accountNumber(requestDto.getAccountNumber())
+			.accountName(requestDto.getAccountName())
 			.status(SettlementRequestStatus.PENDING)
 			.build();
-
-		settlementRequestRepository.save(settlementRequest);
 	}
 
 }
