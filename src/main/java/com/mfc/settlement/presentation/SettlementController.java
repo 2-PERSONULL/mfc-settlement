@@ -11,7 +11,7 @@ import com.mfc.settlement.dto.request.SettlementRequestDto;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/settlement")
+@RequestMapping("/settlement")
 @RequiredArgsConstructor
 public class SettlementController {
 
