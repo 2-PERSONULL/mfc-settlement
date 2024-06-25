@@ -21,4 +21,5 @@ public class SettlementController {
 	public void saveSettlementRequest(@RequestBody SettlementRequestDto requestDto) {
 		settlementRequestService.saveSettlementRequest(requestDto);
 	}
+
 }

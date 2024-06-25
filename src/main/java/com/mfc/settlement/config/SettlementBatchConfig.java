@@ -52,9 +52,9 @@ public class SettlementBatchConfig {
 
 			List<SettlementResult> settlementResults = pendingRequests.stream()
 				.map(settlementRequest -> {
-					Integer requestedAmount = settlementRequest.getAmount();
-					Integer feeAmount = settlementRequest.getFeeAmount();
-					Integer settlementAmount = requestedAmount - feeAmount;
+					Double requestedAmount = settlementRequest.getAmount();
+					Double feeAmount = settlementRequest.getFeeAmount();
+					Double settlementAmount = requestedAmount - feeAmount;
 
 					return SettlementResult.builder()
 						.id(settlementRequest.getId())

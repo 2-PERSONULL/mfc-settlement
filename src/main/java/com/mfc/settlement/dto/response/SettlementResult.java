@@ -11,10 +11,10 @@ import lombok.Setter;
 @Setter
 public class SettlementResult {
 	private Long id;
-	private Long partnerId;
-	private Integer requestedAmount;
-	private Integer feeAmount;
-	private Integer settlementAmount;
+	private String partnerId;
+	private Double requestedAmount;
+	private Double feeAmount;
+	private Double settlementAmount;
 	private String accountNumber;
 	private String accountName;
 	private LocalDateTime settlementDate;
