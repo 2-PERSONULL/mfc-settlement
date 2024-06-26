@@ -10,10 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SettlementRequestDto {
-	private Long partnerId;
-	private Integer amount;
+	private String partnerId;
+	private Double amount;
 	private LocalDateTime settlementDate;
-	private Integer feeAmount;
+	private Double feeAmount;
 	private String accountNumber;
 	private String accountName;
 	private SettlementRequestStatus status;

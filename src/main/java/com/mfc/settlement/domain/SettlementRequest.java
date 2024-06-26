@@ -25,16 +25,16 @@ public class SettlementRequest extends BaseTimeEntity {
 	private Long id;
 
 	@Column(name = "partner_id", nullable = false)
-	private Long partnerId;
+	private String partnerId;
 
 	@Column(name = "amount", nullable = false)
-	private Integer amount;
+	private Double amount;
 
 	@Column(name = "settlement_date", nullable = false)
 	private LocalDateTime settlementDate;
 
 	@Column(name = "fee_amount", nullable = false)
-	private Integer feeAmount;
+	private Double feeAmount;
 
 	@Column(name = "account_number", nullable = false)
 	private String accountNumber;
@@ -46,7 +46,7 @@ public class SettlementRequest extends BaseTimeEntity {
 	private SettlementRequestStatus status;
 
 	@Builder
-	public SettlementRequest(Long id, Long partnerId, Integer amount, LocalDateTime settlementDate, Integer feeAmount
+	public SettlementRequest(Long id, String partnerId, Double amount, LocalDateTime settlementDate, Double feeAmount
 	, String accountNumber, String accountName, SettlementRequestStatus status) {
 		this.id = id;
 		this.partnerId = partnerId;

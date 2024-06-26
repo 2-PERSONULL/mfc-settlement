@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mfc.settlement.common.entity.SettlementRequestStatus;
 import com.mfc.settlement.domain.SettlementRequest;
 import com.mfc.settlement.dto.response.SettlementResult;
+import com.mfc.settlement.infrastructure.ReviewSummaryRepository;
 import com.mfc.settlement.infrastructure.SettlementRequestRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SettlementServiceImpl implements SettlementService {
 	private final SettlementRequestRepository settlementRequestRepository;
+	private final ReviewSummaryRepository reviewSummaryRepository;
 
 	@Transactional
 	@Override
